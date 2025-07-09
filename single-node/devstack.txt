@@ -1,0 +1,28 @@
+1. sudo apt update
+2. sudo apt -y upgrade
+3. sudo useradd -s /bin/bash -d /opt/stack -m stack
+4.  sudo chmod +x /opt/stack
+5. sudo apt-get install sudo -y || yum install -y sudo
+6. echo "stack ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/stack
+7. sudo su stack
+8. cd ~
+9. sudo apt-get install git -y || sudo yum install -y git
+
+10. git clone https://opendev.org/openstack/devstack
+11. cd devstack
+12. cd samples
+13. vim local.conf
+
+search for this: (keep all passwords as "secret" for ease)
+	ADMIN_PASSWORD=secret
+	DATABASE_PASSWORD=secret
+	RABBIT_PASSWORD=secret
+	SERVICE_PASSWORD=secret
+
+14. To exit: esc + :wq  (Save & exit)
+       : esc + :q!    (Don’t save & exit)
+
+15. cp local.conf ../
+16. cd ..
+17. vim local.conf
+18. ./stack.sh FORCE=yes
